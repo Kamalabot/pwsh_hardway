@@ -17,3 +17,5 @@ function MyFunction ($param1, $param2)
 }
 
 MyFunction('5656', 5565)
+
+Get-Process
