@@ -89,3 +89,15 @@ do {
 } until (
     $getInput -eq 'q'
 )
+
+$counter = 0
+do{
+    write-output 'This is super nice'
+    $counter += 1
+}while($counter -lt 5)
+
+$counter = 0
+do{
+    write-output 'This is super nice'
+    $counter += 1
+}until($counter -gt 5)

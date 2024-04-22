@@ -1,0 +1,1 @@
+# Write a calculator function with the three params, along with validateset and switch conditions
