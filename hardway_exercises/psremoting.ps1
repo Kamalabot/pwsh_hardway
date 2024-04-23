@@ -57,4 +57,20 @@ Test-WSMan MDT -Authentication Negotiate -Credential $credentials
 
 Get-NetTCPConnection -LocalPort 5985
 Get-NetAdapter 
- Get-NetAdapter | Select-Object -Property Name, InterfaceDescription | Where-Object -Property Name -EQ 'WiFi'
+Get-NetAdapter | Select-Object -Property Name, InterfaceDescription | Where-Object -Property Name -EQ 'WiFi'
+
+########Referring PowerShell Remoting Lin2Lin Explained[qvJRaYlxI1w]
+################### Configuring Linux 2 Linux Connection ##########################
+# Ensure the openssh-server is installed, if not do a sudo apt install openssh-server -y, this will pull client also
+# modify the /etc/ssh/sshd_config as super-vim and add the following
+# Subsystem    pwsh   /usr/bin/pwsh -sshs -NoLogo -NoProfile
+
+# Then the following must work,
+
+$session = New-PSSession -HostName aicoder -UserName contro -SSHTransport
+
+$session  # Should provide the session object
+
+Invoke-Command -Session $session -ScriptBlock {Get-Process}  # must execute the block inside the remote host
+
+# Was able to establish connection from wsl to Ubuntu machine on LAN. However the connect frm the Ubuntu to wsl / the host machine did not succeed.
