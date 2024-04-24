@@ -40,20 +40,20 @@ Make-Configuration -Name 'testcfg.cfg' -confPath "D:\gitFolders\pwsh_hardway\har
 
 $configPath="D:\gitFolders\pwsh_hardway\hardway_exercises"
 
-$names = @('test1.cfg','test2.cfg', 'test3.gcf')
+$names = @('test1.cfg','test2.cfg', 'test3.gcf', 'testcfg.cfg')
 
-Make-Configuration -Name 'testcfg.cfg' -confPath $configPath
+# Make-Configuration -Name 'testcfg.cfg' -confPath $configPath
 
-Make-Configuration -Name 'testcfg1.cfg' -confPath $configPath
+# Make-Configuration -Name 'testcfg1.cfg' -confPath $configPath
 
-$names | Make-Configuration -confPath $ConfigPath -Os 'Windows'
+# $names | Make-Configuration -confPath $ConfigPath -Os 'Windows'
 
 $names | Make-Configuration -confPath $configPath -Os 'Windows' -Verbose
 
-Get-Content -Path ".\hardway_exercises\$($names[0])"
+# Get-Content -Path ".\hardway_exercises\$($names[0])"
 
-$ConfigPath="D:\\gitFolders\\pwsh_hardway\\hardway_exercises"
+# $ConfigPath="D:\\gitFolders\\pwsh_hardway\\hardway_exercises"
 
-New-Item -Path $ConfigPath -Name 'testing.cfg' -Itemtype File
+# New-Item -Path $ConfigPath -Name 'testing.cfg' -Itemtype File
 
-
+$names | Remove-Item
