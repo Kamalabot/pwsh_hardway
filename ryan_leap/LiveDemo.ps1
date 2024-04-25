@@ -48,6 +48,7 @@ function Get-SysInternalsDiskUsage
     {
         Write-Verbose "Process block"
         $result = & C:\Tools\SysInternalsSuite\du.exe -nobanner $Path 2>$null
+        # The call operator (&) allows you to run commands that are specified as strings (such as file paths with spaces or containing special characters) or stored in variables. 
         [pscustomobject] @{
             'Path'                = $Path
             'FileCount'           = [int64] $result[0].Substring('Files:        '.Length)
