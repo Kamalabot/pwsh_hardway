@@ -155,7 +155,7 @@ $countries.foreach(
 #> for loop with numbers
 for($i=0; $i -lt 10; $i+=2){
     write-output "Ther number is: $i"
-    write-output "The country is:" + $countries[$i]
+    # write-output "The country is:" + $countries[$i]
 }
 
 #do while loop with index
@@ -176,3 +176,110 @@ do{
     write-output 'This is super nice'
     $counter += 1
 }until($counter -gt 5)
+
+# A DataStructures Warmup along with loops, logic and conditional branching
+$a = @('test1', 'test2', 'test3')
+$b = @(0..100)
+$k = [System.Collections.ArrayList]@()
+$k.AddRange(('ian','the'))
+
+foreach($elm in $b){
+    write-output "Elem is $elm"
+}
+
+$b.foreach{
+    "Elm is $($_)"
+}
+# Create variables str, int and double
+$x = 100
+$y = 76.5
+$z = 'ateh'
+# Work with Math, Logic operators and assign to the variables
+$add = $x + $z  # adding 
+$add = write-output "$x + $z"
+# Use the assigned vars to work with if / else / switch statements
+if ($x -lt 150){
+    write-output "There are $x amount of data."
+}
+# Get Inputs from the user and check with conditions and provide output
+$indata = Read-Host "provide data"
+# Create array-list, print the output, add-item, remove-items
+$datalist = [System.Collections.ArrayList]@()
+# Create empty array, add and remove data from it
+while ($true){
+    $indata = Read-Host "Provide Data"
+    $datalist.Add($indata)
+}
+# Create an ArrayList and operate on that
+# Create HashTables, print the output, add-keys and remove-keys
+$dataobj = @{
+    key1=75
+    key2=58
+}
+# Create PSCustomObject in traditional/ shortcut method addmember to it, print the output 
+$newobj = New-Object -TypeName PSCustomObject  
+Add-Member -InputObject $newobj -MemberType NoteProperty -Name 'key1' -Value 56
+Add-Member -InputObject $newobj -MemberType NoteProperty -Name 'key2' -Value 76
+# Add the HashObjects and PSCustomObjects into the ArrayList
+$datalist.Add($newobj)
+# Work on the loops, for, foreach, do while and do until using the csv file that is read 
+$youtubecsv = 'big-mac-raw-index.csv' 
+$bigmac = Import-Csv -Path $youtubecsv -Delimiter ','
+
+$bigmac | Select-Object -First 5 | Format-Table date, name, dollar_price, local_price
+
+$bigmac | Select-Object -Last 5 | Format-Table date, name, dollar_price, local_price | Where-Object -Property dollar_price -EQ -Value 2.5
+# The above command is not working as expected
+
+$bigmac | Format-Table date, name, dollar_price, local_price | Where-Object -Property dollar_price -EQ -Value 2.5
+# There is no data returned
+
+$bigmac |  Where-Object -Property dollar_price -GT -Value 2.5
+
+$bigmac |  Where-Object -Property dollar_price -LT -Value 2.5 
+
+$bigmac |  Where-Object -Property dollar_price -EQ -Value 2.5  
+
+$all2pt5 = $bigmac |  Where-Object -Property dollar_price -EQ -Value 2.5
+
+$all2pt5.count
+
+$allbw2535 = $bigmac | Where-Object -Property dollar_price -GT -Value 2.5 | Where-Object -Property dollar_price -LT -Value 2.75
+
+$allbw2535.Count
+
+# write the for loop with switch cases for the above conditions
+
+for($ind; $ind -lt $bigmac.Count; $ind++){
+    $datapoint = $bigmac[$ind]
+    switch ($datapoint) {
+       {$_.dollar_price -lt 3.5}{
+           $datapoint['dollar_status'] = Write-Output 'low_3.5' 
+        }
+        {$_.dollar_price -gt 2.5}{
+            $datapoint['dollar_status'] = Write-Output 'High_2.5'
+        }
+        Default {
+            $datapoint['dollar_status'] = Write-Output 'Out of Range'
+        }
+    }
+}
+
+$datacnt = $bigmac.Count
+$datacnt
+
+for($ind=0; $ind -lt 10; $ind++){
+    # Write-Output "Dollar value is $ind"
+    $datapoint = $bigmac[$ind]
+    # Write-Output "Dollar value is $($datapoint)"
+
+    Write-Output "Dollar value is $($datapoint.dollar_price)"
+    if ($datapoint.dollar_price -lt 3.5){
+        Add-Member -InputObject $datapoint -MemberType NoteProperty -Name 'dollar_val' -Value 'low3.5' -Force
+    }
+    if ($datapoint.dollar_price -gt 2.5){
+        Add-Member -InputObject $datapoint -MemberType NoteProperty -Name 'dollar_val' -Value 'low3.5' -Force
+    }
+}
+
+$bigmac | Select-Object -last 5
